@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex"><title>Chinly · connected</title>
+<style>
+:root{color-scheme:dark}body{margin:0;min-height:100vh;display:grid;place-items:center;background:#0A0B0D;color:#F4F5F7;font:16px/1.5 -apple-system,system-ui,sans-serif;padding:16px;box-sizing:border-box}
+.box{max-width:480px;text-align:center}h1{font-size:22px;margin:0 0 8px}p{color:#9BA3AF;margin:0 0 16px}
+code{display:block;word-break:break-all;background:#14171C;border:1px solid #262A31;border-radius:12px;padding:14px;color:#F4F5F7;font-size:14px;text-align:left}
+button{margin-top:12px;font:600 15px/1 inherit;padding:12px 18px;border-radius:999px;border:0;background:#7AA7FF;color:#0A0B0D;cursor:pointer}
+</style></head><body><div class="box">
+<h1 id="t">Connected</h1><p id="d">Copy this and paste it back to Claude. It works once, for a few minutes.</p>
+<code id="c"></code><button id="b">Copy</button>
+</div><script>
+// Where TikTok and Instagram send you after "Allow": shows the one-time code so the uploader on the Mac can finish.
+const q = new URLSearchParams(location.search);
+const code = q.get('code'), err = q.get('error_description') || q.get('error');
+if (err || !code) { document.getElementById('t').textContent = 'Not connected'; document.getElementById('d').textContent = err || 'No code in the address.'; document.getElementById('b').hidden = true; }
+document.getElementById('c').textContent = code ? (q.get('state') ? q.get('state') + ' ' : '') + code : '';
+document.getElementById('b').onclick = () => navigator.clipboard.writeText(document.getElementById('c').textContent).then(() => (document.getElementById('b').textContent = 'Copied'));
+</script></body></html>
