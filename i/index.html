@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex"><title>Chinly · Ideas & bugs</title>
+<style>
+:root{color-scheme:dark}body{margin:0;min-height:100vh;display:grid;place-items:center;background:#0A0B0D;color:#F4F5F7;font:16px/1.5 -apple-system,system-ui,sans-serif;padding:16px;box-sizing:border-box}
+.box{max-width:420px;text-align:center}img{width:72px;height:72px;border-radius:17px}h1{font-size:22px;margin:16px 0 8px}p{color:#9BA3AF;margin:0 0 20px}
+a{display:block;margin-top:12px;font:600 16px/1 inherit;padding:15px 18px;border-radius:999px;text-decoration:none}
+.open{background:#7AA7FF;color:#0A0B0D}.get{border:1px solid #262A31;color:#F4F5F7}
+</style></head><body><div class="box">
+<img src="/icon.png" alt="Chinly">
+<h1 id="t">A post on Chinly's Ideas & bugs</h1><p id="d">Open it in Chinly to read it, vote and comment.</p>
+<a class="open" id="o" href="chinly://idea">Open in Chinly</a>
+<a class="get" id="g" href="https://testflight.apple.com/join/8FTgDkTS">Get Chinly</a>
+</div><script>
+// A shared post (the app's Share on a post): opens it in Chinly (chinly://idea?id=N), or offers the app.
+// "Get Chinly" points at the TestFlight beta until the App Store launch: then swap it for the App Store link.
+const id = Number(new URLSearchParams(location.search).get('id')) || 0;
+const es = (navigator.language || '').toLowerCase().startsWith('es');
+if (es) {
+  document.documentElement.lang = 'es';
+  document.getElementById('t').textContent = 'Una publicación en Ideas y fallos de Chinly';
+  document.getElementById('d').textContent = 'Ábrela en Chinly para leerla, votar y comentar.';
+  document.getElementById('o').textContent = 'Abrir en Chinly';
+  document.getElementById('g').textContent = 'Descargar Chinly';
+}
+const link = 'chinly://idea' + (id ? '?id=' + id : '');
+document.getElementById('o').href = link;
+if (id) setTimeout(() => { location.href = link; }, 150);
+</script></body></html>
