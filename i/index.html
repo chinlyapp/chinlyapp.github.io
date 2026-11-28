@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex"><title>Chinly · Ideas & bugs</title>
+<style>
+:root{color-scheme:dark}body{margin:0;min-height:100vh;display:grid;place-items:center;background:#0A0B0D;color:#F4F5F7;font:16px/1.5 -apple-system,system-ui,sans-serif;padding:16px;box-sizing:border-box}
+.box{max-width:420px;text-align:center}img{width:72px;height:72px;border-radius:17px}h1{font-size:22px;margin:16px 0 8px}p{color:#9BA3AF;margin:0 0 20px}
+a{display:block;margin-top:12px;font:600 16px/1 inherit;padding:15px 18px;border-radius:999px;text-decoration:none}
+.open{background:#7AA7FF;color:#0A0B0D}.get{border:1px solid #262A31;color:#F4F5F7}
+</style></head><body><div class="box">
+<img src="/icon.png" alt="Chinly">
+<h1 id="t">A post on Chinly's Ideas & bugs</h1><p id="d">Open it in Chinly to read it, vote and comment.</p>
+<a class="open" id="o" href="chinly://idea">Open in Chinly</a>
+<a class="get" id="g" href="https://apps.apple.com/app/apple-store/id6820171390?pt=129576656&ct=idea-share&mt=8">Get Chinly</a>
+</div><script>
+// A shared post (the app's Share on a post): opens it in Chinly (chinly://idea?id=N), or offers the app.
+// "Get Chinly" opens the App Store (campaign idea-share; 16 Nov, it still pointed at the TestFlight beta).
+const id = Number(new URLSearchParams(location.search).get('id')) || 0;
+// The app's languages (16 Nov: German, French, Italian, Polish and Dutch too), its own name for the board.
+const WORDS = {
+  es: ['Una publicación en Ideas y fallos de Chinly', 'Ábrela en Chinly para leerla, votar y comentar.', 'Abrir en Chinly', 'Descargar Chinly'],
+  de: ['Ein Beitrag in Chinlys Ideen & Fehler', 'Öffne ihn in Chinly, um ihn zu lesen, abzustimmen und zu kommentieren.', 'In Chinly öffnen', 'Chinly laden'],
+  fr: ['Une publication dans Idées et bugs de Chinly', 'Ouvre-la dans Chinly pour la lire, voter et commenter.', 'Ouvrir dans Chinly', 'Télécharger Chinly'],
+  it: ['Un post in Idee e bug di Chinly', 'Aprilo in Chinly per leggerlo, votare e commentare.', 'Apri in Chinly', 'Scarica Chinly'],
+  pl: ['Wpis w Pomysłach i błędach Chinly', 'Otwórz go w Chinly, żeby przeczytać, zagłosować i skomentować.', 'Otwórz w Chinly', 'Pobierz Chinly'],
+  nl: ['Een bericht in Ideeën & bugs van Chinly', 'Open het in Chinly om het te lezen, te stemmen en te reageren.', 'Open in Chinly', 'Download Chinly'],
+};
+const lang = (navigator.language || '').toLowerCase().slice(0, 2);
+const w = WORDS[lang];
+if (w) {
+  document.documentElement.lang = lang;
+  ['t', 'd', 'o', 'g'].forEach((id, i) => { document.getElementById(id).textContent = w[i]; });
+}
+const link = 'chinly://idea' + (id ? '?id=' + id : '');
+document.getElementById('o').href = link;
+if (id) setTimeout(() => { location.href = link; }, 150);
+</script></body></html>
